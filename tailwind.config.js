@@ -2,7 +2,11 @@
 export default {
   content: ['./index.html', './src/**/*.{vue,ts}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        yellowgreen: '#9BC53D',
+      },
+    },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };
