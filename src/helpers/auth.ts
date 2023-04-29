@@ -4,6 +4,6 @@ export const auth = createAuth0({
   domain: 'staffhub.us.auth0.com',
   clientId: 'TvXZneI5qt4aeT9inrytbudJ6JZFcuYz',
   authorizationParams: {
-    redirect_uri: `${window.location.origin}/home`,
+    redirect_uri: window.location.origin,
   },
 });
