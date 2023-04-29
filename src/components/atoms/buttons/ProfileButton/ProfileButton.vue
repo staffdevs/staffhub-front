@@ -2,7 +2,9 @@
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 import { UserCircleIcon, ArrowLeftOnRectangleIcon } from '@heroicons/vue/24/solid';
 import { useAuth0 } from '@auth0/auth0-vue';
+import { useRouter } from 'vue-router';
 
+const { push } = useRouter();
 const { logout: logoutWithRedirect, user } = useAuth0();
 const logout = () => logoutWithRedirect({ logoutParams: { returnTo: window.location.origin } });
 </script>
@@ -33,6 +35,7 @@ const logout = () => logoutWithRedirect({ logoutParams: { returnTo: window.locat
                 active ? 'bg-gray-700 text-white' : 'text-gray-900',
                 'group flex w-full items-center rounded-md p-2 pr-6 text-sm',
               ]"
+              @click="push({ name: 'profile' })"
             >
               <UserCircleIcon :class="['mr-2 h-5 w-5', active ? 'text-white' : 'text-gray-700']" aria-hidden="true" />
               Perfil
