@@ -44,11 +44,11 @@ const logout = () => logoutWithRedirect({ logoutParams: { returnTo: window.locat
                 active ? 'bg-red-500 text-white' : 'text-gray-900',
                 'group flex w-full items-center rounded-md p-2 pr-6 text-sm',
               ]"
+              @click="logout"
             >
               <ArrowLeftOnRectangleIcon
                 :class="['mr-2 h-5 w-5', active ? 'text-white' : 'text-gray-700']"
                 aria-hidden="true"
-                @click="logout"
               />
               Cerrar sesión
             </button>
