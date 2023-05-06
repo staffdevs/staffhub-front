@@ -1,26 +1,40 @@
 import { auth } from '@/helpers';
 import { watch } from 'vue';
-import { router } from './router';
-import { RouteLocation } from 'vue-router';
 
-const authGuard = (to: string, isAuth: boolean, next: () => void) => {
-  const { push } = router;
+export const authGuard = () => {
+  const { isAuthenticated, isLoading } = auth;
 
-  const goToNotFound = to === 'notFound';
-  const goToLogin = to === 'login';
+  const validation = () => (isAuthenticated.value ? true : { name: 'login' });
 
-  if (!isAuth && !goToLogin && !goToNotFound) push({ name: 'login' });
-  else if (isAuth && goToLogin) push({ name: 'home' });
-  else next();
+  return new Promise<
+    | boolean
+    | {
+        name: string;
+      }
+  >((resolve) => {
+    if (!isLoading.value) resolve(validation());
+
+    watch(isLoading, (value) => {
+      if (!value) resolve(validation());
+    });
+  });
 };
 
-export const beforeEachGuard = (to: RouteLocation, from: RouteLocation, next: () => void) => {
+export const guestGuard = () => {
   const { isAuthenticated, isLoading } = auth;
-  const validation = () => authGuard(String(to.name), isAuthenticated.value, next);
 
-  if (!isLoading.value) validation();
+  const validation = () => (!isAuthenticated.value ? true : { name: 'home' });
 
-  watch(isLoading, (value) => {
-    if (!value) validation();
+  return new Promise<
+    | boolean
+    | {
+        name: string;
+      }
+  >((resolve) => {
+    if (!isLoading.value) resolve(validation());
+
+    watch(isLoading, (value) => {
+      if (!value) resolve(validation());
+    });
   });
 };

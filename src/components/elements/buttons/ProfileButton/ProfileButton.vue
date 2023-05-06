@@ -26,7 +26,7 @@ const logout = () => logoutWithRedirect({ logoutParams: { returnTo: window.locat
       leave-to-class="transform scale-95 opacity-0"
     >
       <MenuItems
-        class="absolute right-0 mt-2 w-max origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        class="absolute left-12 top-0 w-max divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
       >
         <div class="p-1">
           <MenuItem v-slot="{ active }">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BaseButton } from '@/components/atoms';
+import { BaseButton } from '@/components/elements';
 import { useAuth0 } from '@auth0/auth0-vue';
 
 const { loginWithRedirect } = useAuth0();
