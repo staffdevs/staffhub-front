@@ -1,5 +1,10 @@
 import { auth } from '@/helpers';
 import { watch } from 'vue';
+import { RouteLocation } from 'vue-router';
+
+export const removeQueryParams = (to: RouteLocation) => {
+  if (Object.keys(to.query).length) return { path: to.path, query: {}, hash: to.hash };
+};
 
 export const authGuard = () => {
   const { isAuthenticated, isLoading } = auth;

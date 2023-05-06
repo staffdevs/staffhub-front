@@ -1,7 +1,7 @@
 import { LoginPage, ProfilePage, NotFoundPage, InfoPage, RequestPage, RequestStatusPage } from '@/components/pages';
 import { MainTemplate } from '@/components/templates';
 import { createRouter, createWebHistory } from 'vue-router';
-import { guestGuard, authGuard } from './middlewares';
+import { guestGuard, authGuard, removeQueryParams } from './middlewares';
 
 const routes = [
   { path: '/login', component: LoginPage, name: 'login', beforeEnter: [guestGuard] },
@@ -9,7 +9,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: MainTemplate,
-    beforeEnter: [authGuard],
+    beforeEnter: [authGuard, removeQueryParams],
     redirect: { name: 'info' },
     children: [
       { path: '/info', component: InfoPage, name: 'info' },
