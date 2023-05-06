@@ -9,17 +9,12 @@ const authGuard = (to: string, isAuth: boolean, next: () => void) => {
   const goToNotFound = to === 'notFound';
   const goToLogin = to === 'login';
 
-  //   if (x || (!x && y !== z)) next();
-  //   if (!x && !y && !z) push({ name: 'login' });
-  //   if (!x && y && z) push({ name: 'home' });
-
-  if (goToNotFound || isAuth !== (to === 'login')) next();
-  else if (!isAuth && !(to === 'login')) push({ name: 'login' });
-  if (isAuth && to === 'login') push({ name: 'home' });
+  if (!isAuth && !goToLogin && !goToNotFound) push({ name: 'login' });
+  else if (isAuth && goToLogin) push({ name: 'home' });
+  else next();
 };
 
 export const beforeEachGuard = (to: RouteLocation, from: RouteLocation, next: () => void) => {
-  console.log('beforeEachGuard');
   const { isAuthenticated, isLoading } = auth;
   const validation = () => authGuard(String(to.name), isAuthenticated.value, next);
 
