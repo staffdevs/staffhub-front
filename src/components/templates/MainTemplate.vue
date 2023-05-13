@@ -5,7 +5,7 @@ import { BaseSidebar } from '@/components/elements';
 <template>
   <div class="flex h-screen bg-gray-100">
     <BaseSidebar />
-    <main>
+    <main class="p-8">
       <router-view />
     </main>
   </div>
