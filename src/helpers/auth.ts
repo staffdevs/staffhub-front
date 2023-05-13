@@ -13,16 +13,22 @@ export const auth = createAuth0({
 });
 
 export function useUser() {
-  const user = computed(() => ({
-    id: auth.user.value.sub,
-    name: auth.user.value.name,
-    nickname: auth.user.value.nickname,
-    email: auth.user.value.email,
-    email_verified: auth.user.value.email_verified,
-    updated_at: auth.user.value.updated_at,
-    picture: auth.user.value.picture,
-    roles: auth.user.value[`${AuthNamespace}/roles`] as UserRole[],
-  }));
+  const user = computed(() => {
+    const roles = auth.user.value[`${AuthNamespace}/roles`] as UserRole[];
+    return {
+      id: auth.user.value.sub,
+      name: auth.user.value.name,
+      nickname: auth.user.value.nickname,
+      email: auth.user.value.email,
+      email_verified: auth.user.value.email_verified,
+      updated_at: auth.user.value.updated_at,
+      picture: auth.user.value.picture,
+      roles,
+      isAdmin: roles.includes(UserRole.Admin),
+      isOperator: roles.includes(UserRole.Operator),
+      isUser: roles.includes(UserRole.User),
+    };
+  });
 
   return { user };
 }
