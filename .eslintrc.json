@@ -16,6 +16,9 @@
     "sourceType": "module"
   },
   "plugins": ["vue", "@typescript-eslint"],
+  "globals": {
+    "newrelic": "readonly"
+  },
   "rules": {
     "vue/html-indent": ["off"],
     "vue/singleline-html-element-content-newline": ["off"],
